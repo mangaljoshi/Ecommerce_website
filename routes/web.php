@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
@@ -17,16 +18,17 @@ Route::match(['get', 'post'], '/admin/logout', [HomeController::class, 'logout']
 Route::get('admin/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/categories/create', [CategoryController::class,'create'])->name('admin.categories.create');
-
-
 Route::post('/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
-
-
-Route::get('/get-slug', [CategoryController::class, 'getSlug'])->name('getSlug');
 Route::get('/search-categories', [CategoryController::class, 'searchCategories'])->name('searchCategories');
 
+//temp-images.create
+Route::post('temp-images/create', [TempImageController:: class,'create'])->name('temp-images.create');
 
-{
+
+// Route::get('/get-slug', [CategoryController::class, 'getSlug'])->name('getSlug');
+
+Route::get('/getSlug', function(Request $request){
+
     $slug = "";
     if (!empty($request->title)) {
         $slug = Str::slug($request->title);
@@ -36,7 +38,7 @@ Route::get('/search-categories', [CategoryController::class, 'searchCategories']
         'status' => true,
         'slug' => $slug,
     ]);
-}
+})->name('getSlug');
 
 
 

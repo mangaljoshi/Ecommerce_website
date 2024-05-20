@@ -41,7 +41,19 @@
                                 <input type="text"  name="slug" id="slug" class="form-control" placeholder="Slug">
                                 <p></p>	
                             </div>
-                        </div>		
+                        </div>	
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="image">Image</label>
+                                <div class="dz-message needsclick">
+                                    <input type="file" name="image" id="image" class="dropzone dz-clickable">
+                                    
+                                    <br> Drop files here or click to upload.<br><br>
+                               </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="status">Status</label>
@@ -135,6 +147,32 @@
             }
         }
     });
+
+    DropZone.autoDiscover = false;
+    const dropzone = $('#image').dropzone({
+        init:function(){
+            this.on('addedfile',function(file){
+                if (this.files.length > 1){
+                    this .removeFile(this.files[0]);
+                }
+            });
+
+        },
+        url: "{{route('temp-images.create')}}",
+        maxFiles:1,
+        paramName:'image',
+        addRemovelinkes:true,
+        acceptedFiles:"image/jpeg,image/png,image/gif";
+        headers:{ 
+            "X-CSRF-TOKEN" ; $("meta[name='csrf-token']").attr('content'){ 
+
+            },
+            Success: function (file,response){
+                // $("#image_id").val(response.image_id);
+                
+            }
+        }
+    })
 });
 
     
