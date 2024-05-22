@@ -20,15 +20,17 @@ Route::get('admin/categories', [CategoryController::class, 'index'])->name('cate
 Route::get('/categories/create', [CategoryController::class,'create'])->name('admin.categories.create');
 Route::post('/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
 Route::get('/search-categories', [CategoryController::class, 'searchCategories'])->name('searchCategories');
+Route::get('/categories/{category}', [CategoryController::class,'edit'])->name('admin.categories.edit');
+Route::put('/categories/{category}/', [CategoryController::class, 'update'])->name('admin.categories.update');
+Route::delete('/categories/{category}/', [CategoryController::class, 'destroy'])->name('admin.categories.delete');
+
 
 //temp-images.create
-Route::post('temp-images/create', [TempImageController:: class,'create'])->name('temp-images.create');
-
+Route::post('temp_images/create', [TempImagesmageController:: class,'create'])->name('temp_images.create');
 
 // Route::get('/get-slug', [CategoryController::class, 'getSlug'])->name('getSlug');
 
 Route::get('/getSlug', function(Request $request){
-
     $slug = "";
     if (!empty($request->title)) {
         $slug = Str::slug($request->title);

@@ -46,14 +46,14 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="image">Image</label>
-                                <div class="dz-message needsclick">
-                                    <input type="file" name="image" id="image" class="dropzone dz-clickable">
-                                    
-                                    <br> Drop files here or click to upload.<br><br>
-                               </div>
+                                <div id="image_id" class="dropzone dz-clickable">
+                                    <input type="file" id="image_id">
+                                    <div class="dz-message needsclick">
+                                        <br> Drop files here or click to upload.<br> <br>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="status">Status</label>
@@ -115,6 +115,10 @@
                     .addClass('invalid-feedback')
                     .html(errors['name']);
             } else {
+
+                if(response['notFound']==true)
+                window.location.href="{{route('categories.index')}}";
+
                 $("#name").removeClass('is-invalid').siblings('p')
                     .removeClass('invalid-feedback')
                     .html("");
@@ -149,26 +153,26 @@
     });
 
     DropZone.autoDiscover = false;
-    const dropzone = $('#image').dropzone({
+    const dropzone = $('#temp_images').dropzone({
         init:function(){
-            this.on('addedfile',function(file){
+            this.on("addedfile", function(file){
                 if (this.files.length > 1){
                     this .removeFile(this.files[0]);
                 }
             });
 
         },
-        url: "{{route('temp-images.create')}}",
+        url: "{{route('temp_images.create')}}",
         maxFiles:1,
-        paramName:'image',
+        paramName:'temp_images',
         addRemovelinkes:true,
         acceptedFiles:"image/jpeg,image/png,image/gif";
         headers:{ 
-            "X-CSRF-TOKEN" ; $("meta[name='csrf-token']").attr('content'){ 
+            "X-CSRF-TOKEN" ; $("meta[name="csrf-token"]").attr('content'){ 
 
             },
             Success: function (file,response){
-                // $("#image_id").val(response.image_id);
+                $("#image_id").val(response.image_id);
                 
             }
         }
