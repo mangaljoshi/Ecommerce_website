@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\BrandController;
+use App\Http\Controllers\admin\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +26,33 @@ Route::get('/search-categories', [CategoryController::class, 'searchCategories']
 Route::get('/categories/{category}', [CategoryController::class,'edit'])->name('admin.categories.edit');
 Route::put('/categories/{category}/', [CategoryController::class, 'update'])->name('admin.categories.update');
 Route::delete('/categories/{category}/', [CategoryController::class, 'destroy'])->name('admin.categories.delete');
+
+// Sub Category Route
+Route::get('admin/sub_categories', [SubCategoryController::class, 'index'])->name('sub_categories.index');
+Route::get('admin/sub_categories/create', [SubCategoryController::class,'create'])->name('admin.sub_categories.create');
+Route::post('admin/sub_categories/store', [SubCategoryController::class, 'store'])->name('admin.sub_categories.store');
+Route::get('sub_categories/{subCategory}/edit', [SubCategoryController::class, 'edit'])->name('sub_categories.edit');
+Route::put('sub_categories/{subCategory}/update', [SubCategoryController::class, 'update'])->name('sub_categories.update');
+Route::delete('/sub_categories/{subCategory}', [SubCategoryController::class, 'destroy'])->name('sub_categories.delete');
+
+
+// Brands Route 
+Route::get('admin/brands', [BrandController::class, 'index'])->name('brands.index');
+Route::get('admin/brands/create' , [BrandController::class,'create'])->name('admin.brands.create');
+Route::post('admin/brands/store', [BrandController::class, 'store'])->name('admin.brands.store');
+Route::get('brands/{brand}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
+Route::put('brands/{brand}', [BrandController::class, 'update'])->name('admin.brands.update');
+
+
+// Product Controller
+
+Route::get('products/create' , [ProductController::class,'create'])->name('admin.products.create');
+
+
+
+
+
+
 
 
 //temp-images.create

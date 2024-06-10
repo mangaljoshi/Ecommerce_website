@@ -11,6 +11,8 @@
 		<!-- Theme style -->
 		<link rel="stylesheet" href="{{asset('admin/css/adminlte.min.css')}}">
 		<link rel="stylesheet" href="{{asset('admin/plugins/dropzone/min/dropzone.min.css')}}">
+		<link rel="stylesheet" href="{{asset('admin/plugins/summernote/summernote-bs4.min.css')}}">
+
 
 
 		<link rel="stylesheet" href="{{asset('admin/css/custom.css')}}">
@@ -73,7 +75,7 @@
 			<!-- /.content-wrapper -->
 			<footer class="main-footer">
 				
-				<strong>Copyright &copy; 2014-2022 AmazingShop All rights reserved.
+				<strong>Copyright &copy; 2024 AmazingShop All rights reserved.
 			</footer>
 			
 		</div>
@@ -86,13 +88,20 @@
 		<script src="{{asset('admin/js/adminlte.min.js')}}"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="{{asset('admin/js/demo.js')}}"></script>
-		
+
 		<script src="{{asset('admin/plugins/dropzone/min/dropzone.min.css')}}"></script>
+		<script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
+
 		<script type="text/javascript">
 		$.ajaxSetup({
 			headers:{
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+		});
+
+		$(document).ready(function(){
+			$(".summernote").summernote();
+			
 		});
 		
 

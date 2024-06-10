@@ -40,8 +40,8 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'slug' => 'required|unique:categories',
-            // 'status' => 'required|numeric',
-            // 'image' => 'nullable',
+            'status' => 'required|numeric',
+            'image' => 'nullable',
         ]);
         
         if ($validator->fails()) {
@@ -118,7 +118,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'slug' => 'required|unique:categories,slug,'.$categoryId.',id',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust image validation rules as per your requirements
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
             'status' => 'required|in:0,1',
         ]);
         
